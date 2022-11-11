@@ -7,9 +7,11 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "outputPath": "dist/apps/demo-site",
+        "outputPath": "dist/apps/demo-site/browser",
         "index": "apps/demo-site/src/index.html",
         "main": "apps/demo-site/src/main.ts",
         "polyfills": "apps/demo-site/src/polyfills.ts",
@@ -19,7 +21,9 @@
           "apps/demo-site/src/favicon.ico",
           "apps/demo-site/src/assets"
         ],
-        "styles": ["apps/demo-site/src/styles.scss"],
+        "styles": [
+          "apps/demo-site/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -67,6 +71,20 @@
       },
       "defaultConfiguration": "development"
     },
+    "serve-ssr": {
+      "executor": "@nguniversal/builders:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "demo-site:build:development",
+          "serverTarget": "demo-site:server:development"
+        },
+        "production": {
+          "browserTarget": "demo-site:build:production",
+          "serverTarget": "demo-site:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
@@ -84,11 +102,39 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/demo-site/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "server": {
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/apps/demo-site/server",
+        "main": "apps/demo-site/src/ssr-server.ts",
+        "tsConfig": "apps/demo-site/tsconfig.server.json",
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "apps/demo-site/src/environments/environment.ts",
+              "with": "apps/demo-site/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false
+        }
+      },
+      "defaultConfiguration": "production"
     }
   },
   "tags": []

@@ -19,12 +19,18 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/demo-site-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/demo-site-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["demo-site"]
+  "implicitDependencies": [
+    "demo-site"
+  ]
 }

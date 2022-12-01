@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  demosite:
+    image: demosite
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    container_name: demosite-website
+    ports:
+      - 4000:4000
+    networks:
+      - demoNetwork
+
+networks:
+  demoNetwork:
+    driver: bridge

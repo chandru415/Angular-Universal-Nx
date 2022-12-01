@@ -7,7 +7,8 @@
     "postinstall": "node ./decorate-angular-cli.js",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "ssr-prod":"nx run demo-site:build:production && nx run demo-site:server:production"
   },
   "private": true,
   "dependencies": {
